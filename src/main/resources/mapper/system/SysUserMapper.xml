@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.study.springboot.system.mapper.SysUserMapper">
+
+    <select id="getUserByAccount" resultType="com.neusoft.study.springboot.system.entity.SysUser">
+        SELECT * FROM SYS_USER
+        <where>
+            <choose>
+                <when test="account !=null and account != '' ">
+                    and user_account = #{account}
+                </when>
+            </choose>
+        </where>
+    </select>
+
+
+</mapper>

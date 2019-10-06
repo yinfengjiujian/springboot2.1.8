@@ -1,0 +1,73 @@
+server:
+  port: 8888
+spring:
+  devtools:
+    restart:
+      enabled: false    #false--不重新启动，进行热部署   --true服务会重启进行热部署
+      additional-paths: src/main/java
+  application:
+    name: springboot-study
+  datasource:
+    #以下是JDBC 配置必选配置：
+    url: jdbc:mysql://192.168.146.130:3306/studydb?useSSL=false
+    username: root
+    password: 1qaz@WSX
+    driver-class-name: com.mysql.cj.jdbc.Driver     #com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    #DruidDataSource配置属性列表
+    druid:
+      initial-size: 20    #初始化时建立物理连接的个数
+      min-idle: 3         #最小连接池数量
+      max-active: 100     #最大连接池数量
+      max-wait: 60000     #获取连接时最大等待时间
+      stat-view-servlet:
+        login-username: admin   #配置监控页面访问登录名称
+        login-password: admin   #配置监控页面访问密码
+        url-pattern: /druid/*   # 监控页面访问路径
+        reset-enable: true      # 允许清空统计数据
+        enabled: true           # 开启页面访问必须打开
+      filter:
+        stat:
+          log-slow-sql: true    #是否开启慢sql查询监控
+          slow-sql-millis: 1    #慢SQL执行时间
+      time-between-eviction-runs-millis: 60000    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 300000      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      validation-query: SELECT 1 FROM DUAL
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      web-stat-filter:
+        enabled: true           # 开启页面访问必须打开
+      use-global-data-source-stat: true   # 合并多个DruidDataSource的监控数据
+      filters: stat,wall,slf4j
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml     # MyBatis Mapper 所对应的 XML 文件位置，如果您在 Mapper 中有自定义方法
+  #  # 配置扫描通用枚举 # 支持统配符 * 或者 ; 分割
+  #type-enums-package: com.abbottliu.sys.enums,com.abbottliu.enums
+  # 启动时是否检查 MyBatis XML 文件的存在，默认不检查
+  check-config-location: false
+  #  ExecutorType.SIMPLE：该执行器类型不做特殊的事情，为每个语句的执行创建一个新的预处理语句（PreparedStatement）
+  #  ExecutorType.REUSE：该执行器类型会复用预处理语句（PreparedStatement）
+  #  ExecutorType.BATCH：该执行器类型会批量执行所有的更新语句
+  executor-type: simple
+  configuration:
+    # 是否开启自动驼峰命名规则（camel case）映射
+    map-underscore-to-camel-case: true
+    #配置JdbcTypeForNull, oracle数据库必须配置
+    jdbc-type-for-null: null
+    cache-enabled: true       #配置的缓存全家开关
+    lazy-loading-enabled: true      #延时加载的开关
+    multiple-result-sets-enabled: true  #开启的话，延时加载一个属性时会加载该对象的全部属性，否则按需加载属性
+    call-setters-on-nulls: true       #解决mybatis resultMap 空值映射问题
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   #打印SQL语句，开发调试用
+  global-config:
+    #驼峰下划线转换
+    column-underline: true
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      id-type: id_worker
