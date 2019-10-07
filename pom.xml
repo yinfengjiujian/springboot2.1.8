@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.neusoft.study</groupId>
-    <artifactId>springboot</artifactId>
+    <artifactId>duanml-springboot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>duanml-springboot</name>
     <description>Demo project for Spring Boot</description>
