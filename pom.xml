@@ -11,7 +11,7 @@
     <groupId>com.neusoft.study</groupId>
     <artifactId>springboot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot</name>
+    <name>duanml-springboot</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
