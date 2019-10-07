@@ -1,19 +1,22 @@
 package com.neusoft.study.springboot.system.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.neusoft.study.springboot.common.CommonResult;
 import com.neusoft.study.springboot.system.entity.SysUser;
 import com.neusoft.study.springboot.system.service.ISysUserService;
+import com.neusoft.study.springboot.utils.RedisServiceUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -32,10 +35,24 @@ public class SysUserController {
     @Autowired
     private ISysUserService iSysUserService;
 
+    @Autowired
+    private RedisServiceUtil redisServiceUtil;
+
     @ApiOperation(value = "获取所有用户信息",notes = "查询数据库中的记录",httpMethod = "GET",response = List.class)
     @RequestMapping(value = "/getAllUser",method = {RequestMethod.GET,RequestMethod.POST})
     public List<SysUser> getAllUser() {
-        return iSysUserService.getAllUser();
+        List<SysUser> allUser = iSysUserService.getAllUser();
+
+        String toJSONString = JSONObject.toJSONString(allUser);
+
+        redisServiceUtil.set("duanml",toJSONString);
+
+        Map<String,Object> objectMap = new HashMap<>();
+        objectMap.put("name","尹海燕");
+
+        redisServiceUtil.hmset("name",objectMap);
+
+        return allUser;
     }
 
     @ApiOperation(value = "根据用户ID获取用户的信息",notes = "查询数据库中的记录",httpMethod = "POST",response = SysUser.class)

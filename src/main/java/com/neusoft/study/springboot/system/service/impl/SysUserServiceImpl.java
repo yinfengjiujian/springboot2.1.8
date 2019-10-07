@@ -27,7 +27,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public List<SysUser> getAllUser() {
         QueryWrapper<SysUser> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("id",12L);
         return baseMapper.selectList(queryWrapper);
     }
 

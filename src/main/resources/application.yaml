@@ -44,6 +44,26 @@ spring:
       use-global-data-source-stat: true   # 合并多个DruidDataSource的监控数据
       filters: stat,wall,slf4j
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+#redis配置
+  redis:
+    password:
+    timeout: 6000ms   #连接超时时长（毫秒）
+    database: 2
+    port: 6379
+    host: 192.168.146.130
+    #集群模式的配置
+    #    cluster:
+    #      nodes:
+    #        - 192.168.86.128:6389
+    #        - 192.168.86.128:6390
+    #        - 192.168.86.128:6391
+    #        - 192.168.86.128:6392
+    jedis:
+      pool:
+        max-active: 1000      # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10          # 连接池中的最大空闲连接
+        min-idle: 5           # 连接池中的最小空闲连接
 mybatis-plus:
   mapper-locations: classpath:mapper/**/*.xml     # MyBatis Mapper 所对应的 XML 文件位置，如果您在 Mapper 中有自定义方法
   #  # 配置扫描通用枚举 # 支持统配符 * 或者 ; 分割
