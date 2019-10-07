@@ -1,6 +1,7 @@
 package com.neusoft.study.springboot.system.controller;
 
 
+import com.neusoft.study.springboot.common.CommonResult;
 import com.neusoft.study.springboot.system.entity.SysUser;
 import com.neusoft.study.springboot.system.service.ISysUserService;
 import io.swagger.annotations.Api;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
@@ -46,8 +48,12 @@ public class SysUserController {
     @ApiOperation(value = "根据用户账号获取用户的信息",notes = "查询数据库中的记录，自定义XML中的方法",httpMethod = "POST",response = SysUser.class)
     @ApiImplicitParam(name = "account",value = "用户账号",required = true,dataType = "String",paramType = "query")
     @RequestMapping(value = "/getUserByAccount",method = {RequestMethod.GET,RequestMethod.POST})
-    public SysUser getUserByAccount(String account) {
-        return iSysUserService.getUserByAccount(account);
+    public CommonResult getUserByAccount(String account) {
+        SysUser userByAccount = iSysUserService.getUserByAccount(account);
+        if (Objects.isNull(userByAccount)) {
+            return CommonResult.warnResult("160001","没有查询到相关数据！");
+        }
+        return new CommonResult<>(userByAccount);
     }
 
 
