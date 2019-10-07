@@ -12,7 +12,7 @@ spring:
     url: jdbc:mysql://192.168.146.130:3306/studydb?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     username: root
     password: 1qaz@WSX
-    driver-class-name: com.mysql.cj.jdbc.Driver     #com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver     #com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     #DruidDataSource配置属性列表
     druid:
