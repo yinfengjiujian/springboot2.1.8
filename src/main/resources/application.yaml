@@ -12,11 +12,11 @@ spring:
     url: jdbc:mysql://192.168.146.130:3306/studydb?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     username: root
     password: 1qaz@WSX
-    driver-class-name: com.mysql.jdbc.Driver     #com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver     #com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     #DruidDataSource配置属性列表
     druid:
-      initial-size: 20    #初始化时建立物理连接的个数
+      initial-size: 3    #初始化时建立物理连接的个数
       min-idle: 3         #最小连接池数量
       max-active: 100     #最大连接池数量
       max-wait: 60000     #获取连接时最大等待时间
@@ -33,7 +33,7 @@ spring:
       time-between-eviction-runs-millis: 60000    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       min-evictable-idle-time-millis: 300000      # 配置一个连接在池中最小生存的时间，单位是毫秒
       validation-query: SELECT 1 FROM DUAL
-      test-on-borrow: false
+      test-on-borrow: true
       test-on-return: false
       test-while-idle: true
       # 打开PSCache，并且指定每个连接上PSCache的大小
