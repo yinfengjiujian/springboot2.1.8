@@ -85,9 +85,11 @@ mybatis-plus:
     call-setters-on-nulls: true       #解决mybatis resultMap 空值映射问题
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   #打印SQL语句，开发调试用
   global-config:
+    banner: false           #是否输出mybatis的图标
     #驼峰下划线转换
     column-underline: true
     db-config:
       logic-delete-value: 1
       logic-not-delete-value: 0
       id-type: id_worker
+

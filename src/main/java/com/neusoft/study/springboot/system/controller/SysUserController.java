@@ -73,8 +73,6 @@ public class SysUserController {
         return new CommonResult<>(userByAccount);
     }
 
-
-
     @ApiOperation(value = "获取用户自定义用户信息",notes = "直接类中返回，测试自定义方法，非Mybatis方法",httpMethod = "POST",response = SysUser.class)
     @RequestMapping(value = "/getForUser",method = {RequestMethod.GET,RequestMethod.POST})
     public SysUser getForUser() {
