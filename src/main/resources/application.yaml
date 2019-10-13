@@ -44,7 +44,8 @@ spring:
       use-global-data-source-stat: true   # 合并多个DruidDataSource的监控数据
       filters: stat,wall,slf4j
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-#redis配置
+    initialization-mode: always
+  #redis配置
   redis:
     password:
     timeout: 6000ms   #连接超时时长（毫秒）

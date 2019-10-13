@@ -1,14 +1,13 @@
-package com.neusoft.study.springboot.system.entity;
+package com.neusoft.study.springboot.biz.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 /**
@@ -17,17 +16,19 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author 段美林
- * @since 2019-10-06
+ * @since 2019-10-13
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("SYS_USER")
 @ApiModel(value="SysUser对象", description="用户信息主表")
 public class SysUser implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户ID")
     @TableId("id")
@@ -45,13 +46,21 @@ public class SysUser implements Serializable {
     @TableField("user_passwd")
     private String userPasswd;
 
-    @ApiModelProperty(value = "是否锁定")
-    @TableField("is_locked")
-    private Integer isLocked;
-
     @ApiModelProperty(value = "用户密码盐")
     @TableField("passwd_salt")
     private String passwdSalt;
+
+    @ApiModelProperty(value = "用户状态")
+    @TableField("state")
+    private Integer state;
+
+    @ApiModelProperty(value = "创建时间")
+    @TableField("create_time")
+    private LocalDate createTime;
+
+    @ApiModelProperty(value = "修改时间")
+    @TableField("modify_time")
+    private LocalDate modifyTime;
 
     @ApiModelProperty(value = "用户扩展信息表ID")
     @TableField("user_ext_id")

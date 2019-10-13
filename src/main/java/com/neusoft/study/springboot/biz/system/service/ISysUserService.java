@@ -1,9 +1,8 @@
-package com.neusoft.study.springboot.system.service;
+package com.neusoft.study.springboot.biz.system.service;
 
-import com.neusoft.study.springboot.system.entity.SysUser;
+import com.neusoft.study.springboot.biz.system.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.nio.file.LinkOption;
 import java.util.List;
 
 /**
@@ -12,7 +11,7 @@ import java.util.List;
  * </p>
  *
  * @author 段美林
- * @since 2019-10-06
+ * @since 2019-10-08
  */
 public interface ISysUserService extends IService<SysUser> {
 

@@ -1,10 +1,9 @@
-package com.neusoft.study.springboot.system.controller;
-
+package com.neusoft.study.springboot.biz.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.neusoft.study.springboot.biz.system.entity.SysUser;
+import com.neusoft.study.springboot.biz.system.service.ISysUserService;
 import com.neusoft.study.springboot.common.CommonResult;
-import com.neusoft.study.springboot.system.entity.SysUser;
-import com.neusoft.study.springboot.system.service.ISysUserService;
 import com.neusoft.study.springboot.utils.RedisServiceUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -81,4 +80,3 @@ public class SysUserController {
 
 
 }
-

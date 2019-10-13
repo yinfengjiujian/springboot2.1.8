@@ -1,6 +1,6 @@
-package com.neusoft.study.springboot.system.mapper;
+package com.neusoft.study.springboot.biz.system.mapper;
 
-import com.neusoft.study.springboot.system.entity.SysUser;
+import com.neusoft.study.springboot.biz.system.entity.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -11,11 +11,10 @@ import org.springframework.stereotype.Repository;
  * </p>
  *
  * @author 段美林
- * @since 2019-10-06
+ * @since 2019-10-08
  */
 @Repository
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
     SysUser getUserByAccount(@Param("account") String account);
-
 }
