@@ -1,5 +1,6 @@
 package com.neusoft.study.springboot.exception;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.neusoft.study.springboot.common.CommonResult;
 import com.neusoft.study.springboot.exception.enums.ErrorEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,12 @@ public class GlobalExceptionHandler {
         return CommonResult.errorResult(ErrorEnum.PARAM_FAIL_CODE.getCode().toString(), e.getMessage());
     }
 
+    @ExceptionHandler(InvalidFormatException.class)
+    public CommonResult<Void> invalidFormatException(BindException e) {
+        log.error(e.getMessage(), e);
+        return CommonResult.errorResult(ErrorEnum.PARAM_FAIL_CODE.getCode().toString(), e.getMessage());
+    }
+
     /**
      * 方法参数校验
      */
@@ -49,7 +56,7 @@ public class GlobalExceptionHandler {
         // 按需重新封装需要返回的错误信息 解析原错误信息，封装后返回，此处返回非法的字段名称error.getField()，原始值error.getRejectedValue()，错误信息
         StringJoiner sj = new StringJoiner(";");
         e.getBindingResult().getFieldErrors().forEach(x -> sj.add(x.getDefaultMessage()));
-        return CommonResult.errorResult(ErrorEnum.PARAM_FAIL_CODE.getCode().toString(), sj.toString());
+        return CommonResult.errorResult(ErrorEnum.PARAM_FAIL_CODE.getCode().toString(), ErrorEnum.PARAM_FAIL_CODE.getMessage() + sj.toString());
     }
 
     /**

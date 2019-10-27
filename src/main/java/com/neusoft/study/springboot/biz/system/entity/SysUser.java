@@ -1,14 +1,16 @@
 package com.neusoft.study.springboot.biz.system.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.time.LocalDate;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -56,11 +58,11 @@ public class SysUser implements Serializable {
 
     @ApiModelProperty(value = "创建时间")
     @TableField("create_time")
-    private LocalDate createTime;
+    private LocalDateTime createTime;
 
     @ApiModelProperty(value = "修改时间")
     @TableField("modify_time")
-    private LocalDate modifyTime;
+    private LocalDateTime modifyTime;
 
     @ApiModelProperty(value = "用户扩展信息表ID")
     @TableField("user_ext_id")

@@ -2,17 +2,21 @@ package com.neusoft.study.springboot.biz.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.neusoft.study.springboot.biz.system.entity.SysUser;
+import com.neusoft.study.springboot.biz.system.entity.dto.UserDto;
+import com.neusoft.study.springboot.biz.system.entity.valid.group.UserLoginValid;
+import com.neusoft.study.springboot.biz.system.entity.valid.group.UserRegistValid;
 import com.neusoft.study.springboot.biz.system.service.ISysUserService;
 import com.neusoft.study.springboot.common.CommonResult;
 import com.neusoft.study.springboot.utils.RedisServiceUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +65,7 @@ public class SysUserController {
         return iSysUserService.getUserById(id);
     }
 
-    @ApiOperation(value = "根据用户账号获取用户的信息",notes = "查询数据库中的记录，自定义XML中的方法",httpMethod = "POST",response = SysUser.class)
+    @ApiOperation(value = "根据用户账号获取用户的信息",notes = "查询数据库中的记录，自定义XML中的方法",httpMethod = "POST",response = CommonResult.class)
     @ApiImplicitParam(name = "account",value = "用户账号",required = true,dataType = "String",paramType = "query")
     @RequestMapping(value = "/getUserByAccount",method = {RequestMethod.GET,RequestMethod.POST})
     public CommonResult getUserByAccount(String account) {
@@ -76,6 +80,32 @@ public class SysUserController {
     @RequestMapping(value = "/getForUser",method = {RequestMethod.GET,RequestMethod.POST})
     public SysUser getForUser() {
         return iSysUserService.getForUser();
+    }
+
+    @ApiOperation(value = "用户登录操作",notes = "用户登录",httpMethod = "POST",response = CommonResult.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userDto",value = "用户登录信息对象",required = true),
+            @ApiImplicitParam(name = "response",value = "登录成功以后，用于返回用户信息",required = true)
+    })
+    @PostMapping("/login")
+    public CommonResult login(@RequestBody @Validated(UserLoginValid.class) UserDto userDto,
+                              HttpServletResponse response) {
+        return iSysUserService.login(userDto,response);
+    }
+
+    /**
+     * 用户注册操作
+     * @param userDto
+     * @return
+     */
+    @ApiOperation(value = "用户注册操作",notes = "用户注册",httpMethod = "POST",response = CommonResult.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userDto",value = "用户注册信息传递对象",required = true)
+    })
+    @PostMapping(value = "/regist")
+    public CommonResult addUser(@Validated(UserRegistValid.class) @RequestBody UserDto userDto) {
+        CommonResult commonResult = iSysUserService.addUser(userDto);
+        return commonResult;
     }
 
 

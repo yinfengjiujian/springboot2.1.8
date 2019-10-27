@@ -22,6 +22,8 @@ public final class CommonResult<T> implements Serializable {
 
     private int status = HttpStatus.OK.value();
 
+    private String message;
+
     private String errorCode = "";
 
     private String errorMsg = "";
@@ -30,6 +32,23 @@ public final class CommonResult<T> implements Serializable {
 
     public CommonResult(T resultBody) {
         this.resultBody = resultBody;
+    }
+
+    public CommonResult(T resultBody,String message) {
+        this.message = message;
+        this.resultBody = resultBody;
+    }
+
+    /**
+     * 统一返回成功处理
+     * @param message
+     * @param <T>
+     * @return
+     */
+    public static <T> CommonResult<T> successResult(String message){
+        CommonResult<T> commonResult = new CommonResult<>();
+        commonResult.message = message;
+        return commonResult;
     }
 
     /**

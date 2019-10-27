@@ -2,6 +2,7 @@ package com.neusoft.study.springboot.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>Title: com.neusoft.study.springboot.exception</p>
@@ -12,10 +13,26 @@ import lombok.Data;
  * Description: No Description
  */
 @Data
-@AllArgsConstructor
 public class BusinessException extends RuntimeException {
 
     private String errorCode;
 
     private String errorMsg;
+
+    private final Integer code = 100000;
+
+    public BusinessException() {
+
+    }
+    public BusinessException(String message) {
+        this.errorMsg = message;
+        this.errorCode = code.toString();
+    }
+
+    public BusinessException(String errorCode,String errorMsg) {
+        super(errorMsg);
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+    }
+
 }
