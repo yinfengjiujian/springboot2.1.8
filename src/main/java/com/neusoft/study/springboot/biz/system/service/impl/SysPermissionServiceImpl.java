@@ -5,6 +5,7 @@ import com.neusoft.study.springboot.biz.system.mapper.SysPermissionMapper;
 import com.neusoft.study.springboot.biz.system.service.ISysPermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2019-10-13
  */
 @Service
+@Transactional(rollbackFor = Throwable.class)
 public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysPermission> implements ISysPermissionService {
 
 }

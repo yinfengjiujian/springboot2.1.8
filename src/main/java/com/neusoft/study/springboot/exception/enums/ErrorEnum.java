@@ -23,7 +23,8 @@ public enum ErrorEnum {
 
     DECODED_JWTTOKEN_ERROR(60001,"JWTToken认证解密出现UnsupportedEncodingException异常"),
     DECODED_JWTTOKEN_COMMON(60002,"解密Token中的公共信息出现JWTDecodeException异常"),
-    ENCRYPT_JWTTOKEN_ERROR(60003,"JWTToken加密出现UnsupportedEncodingException异常");
+    ENCRYPT_JWTTOKEN_ERROR(60003,"JWTToken加密出现UnsupportedEncodingException异常"),
+    TOKEN_ERROR(50008,"登录Token认证异常，请重新登录！");
 
     private Integer code;
 

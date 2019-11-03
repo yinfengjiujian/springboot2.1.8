@@ -4,4 +4,5 @@ shiro:
   encryptJWTKey: U0JBUElKV1RkV2FuZzkyNjQ1NA==   # JWT认证加密私钥(Base64加密)
   refreshTokenExpireTime: 1800                  # RefreshToken过期时间-30分钟-30*60(秒为单位)
   accessTokenExpireTime: 300                    # AccessToken过期时间-5分钟-5*60(秒为单位)
+  loginPersionCacheExpireTime: 21600            # 个人基本、角色信息过期时间-6小时-6*60*60(秒为单位)
   tokenKey: Authorization                       # 生成的token返回到请求头heads中的key值

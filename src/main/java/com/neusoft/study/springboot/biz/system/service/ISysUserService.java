@@ -2,6 +2,7 @@ package com.neusoft.study.springboot.biz.system.service;
 
 import com.neusoft.study.springboot.biz.system.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.neusoft.study.springboot.biz.system.entity.UserInfo;
 import com.neusoft.study.springboot.biz.system.entity.dto.UserDto;
 import com.neusoft.study.springboot.common.CommonResult;
 
@@ -30,4 +31,9 @@ public interface ISysUserService extends IService<SysUser> {
 
     CommonResult login(UserDto userDto,HttpServletResponse response);
 
+    CommonResult getUserInfo();
+
+    CommonResult logout();
+
+    UserInfo getCacheUserInfo(String account);
 }

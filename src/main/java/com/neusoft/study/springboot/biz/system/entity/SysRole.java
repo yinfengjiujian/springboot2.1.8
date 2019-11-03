@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -40,7 +42,7 @@ public class SysRole implements Serializable {
     @TableField("role_description")
     private String roleDescription;
 
-    @ApiModelProperty(value = "创建人ID")
+        @ApiModelProperty(value = "创建人ID")
     @TableField("create_auth")
     private Long createAuth;
 
@@ -50,7 +52,7 @@ public class SysRole implements Serializable {
 
     @ApiModelProperty(value = "创建时间")
     @TableField("create_time")
-    private LocalDate createTime;
+    private LocalDateTime createTime;
 
     @ApiModelProperty(value = "修改人ID")
     @TableField("modify_auth")
@@ -62,7 +64,7 @@ public class SysRole implements Serializable {
 
     @ApiModelProperty(value = "修改时间")
     @TableField("modify_time")
-    private LocalDate modifyTime;
+    private LocalDateTime modifyTime;
 
     @ApiModelProperty(value = "是否有效")
     @TableField("available")

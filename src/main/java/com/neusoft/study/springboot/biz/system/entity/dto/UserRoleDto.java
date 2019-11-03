@@ -1,12 +1,12 @@
 package com.neusoft.study.springboot.biz.system.entity.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -14,20 +14,19 @@ import java.io.Serializable;
  * <p>Company:东软集团(neusoft)</p>
  * <p>Copyright:Copyright(c)</p>
  * User: Administrator
- * Date: 2019/10/13 21:11
+ * Date: 2019/11/2 21:15
  * Description: No Description
  */
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoleDto implements Serializable {
+public class UserRoleDto implements Serializable {
 
-    @NotBlank(message = "用户角色代码不能为空！")
-    @Length(max = 50,message = "用户账号不能超过50个字符")
-    private String roleName;
+    @NotNull(message = "用户Id不能为空！")
+    @Length(max = 25,message = "用户Id不能超过25个字符")
+    private Long userId;
 
-    @NotBlank(message = "用户角色描述不能为空！")
-    @Length(max = 50,message = "用户角色描述不能超过50个字符")
-    private String roleDescription;
+    @NotNull(message = "角色id不能为空！")
+    @Length(max = 25,message = "角色id不能超过25个字符")
+    private Long roleId;
 }

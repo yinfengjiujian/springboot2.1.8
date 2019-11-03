@@ -1,6 +1,7 @@
 package com.neusoft.study.springboot.config;
 
 import com.neusoft.study.springboot.component.shiro.UserRealm;
+import com.neusoft.study.springboot.component.shiro.cache.manager.CustomCacheManager;
 import com.neusoft.study.springboot.component.shiro.jwt.JwtFilter;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
@@ -42,14 +43,17 @@ public class ShiroConfig {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         // 使用自定义Realm
         defaultWebSecurityManager.setRealm(userRealm);
+        userRealm.setCachingEnabled(true);
+        userRealm.setAuthenticationCachingEnabled(true);
+        userRealm.setAuthorizationCachingEnabled(true);
         // 关闭Shiro自带的session
         DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
         DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
         defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
         subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
         defaultWebSecurityManager.setSubjectDAO(subjectDAO);
-        // 设置自定义Cache缓存 TODO
-//        defaultWebSecurityManager.setCacheManager(new CustomCacheManager());
+        // 设置自定义Cache缓存
+        defaultWebSecurityManager.setCacheManager(new CustomCacheManager());
         return defaultWebSecurityManager;
     }
 
@@ -76,7 +80,7 @@ public class ShiroConfig {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
         // 添加自己的过滤器取名为jwt
         Map<String, Filter> filterMap = new HashMap<>(16);
-        filterMap.put("jwt", new JwtFilter());
+        filterMap.put("jwtFilter", new JwtFilter());
         factoryBean.setFilters(filterMap);
         factoryBean.setSecurityManager(securityManager);
         // 自定义url规则使用LinkedHashMap有序Map
@@ -95,7 +99,7 @@ public class ShiroConfig {
         // 公开接口
 //         filterChainDefinitionMap.put("/api/**", "anon");
         // 所有请求通过我们自己的JWTFilter
-        filterChainDefinitionMap.put("/**", "jwt");
+        filterChainDefinitionMap.put("/**", "jwtFilter");
         factoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return factoryBean;
     }

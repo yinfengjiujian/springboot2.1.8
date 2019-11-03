@@ -28,10 +28,14 @@ public class UserProperties {
     //JWT认证加密私钥(Base64加密)
     private String encryptJWTKey;
 
-    //RefreshToken过期时间-30分钟-30*60(秒为单位)
+    //RefreshToken刷新token过期时间-30分钟-30*60(秒为单位)
     private Long refreshTokenExpireTime;
 
+    //访问令牌过期时间
     private Long accessTokenExpireTime;
+
+    //个人基本信息、角色信息缓存过期时间
+    private Long loginPersionCacheExpireTime;
 
     private String tokenKey;
 }

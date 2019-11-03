@@ -9,9 +9,9 @@ spring:
     name: springboot-study
   datasource:
     #以下是JDBC 配置必选配置：
-    url: jdbc:mysql://192.168.146.130:3306/studydb?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2b8&rewriteBatchedStatements=true
+    url: jdbc:mysql://192.168.241.188:3306/studydb?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2b8&rewriteBatchedStatements=true
     username: root
-    password: 1qaz@WSX
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver     #com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     #DruidDataSource配置属性列表
@@ -51,7 +51,7 @@ spring:
     timeout: 6000ms   #连接超时时长（毫秒）
     database: 2
     port: 6379
-    host: 192.168.146.130
+    host: 192.168.241.188
     #集群模式的配置
     #    cluster:
     #      nodes:
@@ -93,3 +93,5 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
       id-type: id_worker
+jwt:
+  jwt-open: true

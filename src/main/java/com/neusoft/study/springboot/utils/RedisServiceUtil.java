@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * Redis工具类
@@ -577,5 +578,26 @@ public final class RedisServiceUtil {
         return redisTemplate.opsForValue().getBit(RedisServiceUtil.FILTER_KEY, index);
     }
 
+    /**
+     * 清空redis所有缓存，慎用
+     */
+    public void clearShiroAll(String prefixStr) {
+        Set<String> keys = redisTemplate.keys(prefixStr + "*");
+        redisTemplate.delete(keys);
+    }
 
+    public Set getShiroAllKey(String prefixStr) {
+        return redisTemplate.keys(prefixStr + "*");
+    }
+
+    public int getShiroSize(String prefixStr) {
+        return redisTemplate.keys(prefixStr + "*").size();
+    }
+
+    public List<Object> getShiroAllValue(String prefixStr) {
+        Set<String> shiroAllKey = this.getShiroAllKey(prefixStr);
+        return shiroAllKey.stream().map(key -> {
+            return this.get(key);
+        }).collect(Collectors.toList());
+    }
 }

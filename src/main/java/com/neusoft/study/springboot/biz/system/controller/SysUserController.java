@@ -12,10 +12,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
@@ -93,6 +96,12 @@ public class SysUserController {
         return iSysUserService.login(userDto,response);
     }
 
+    @ApiOperation(value = "用户退出操作",notes = "用户退出",httpMethod = "POST",response = CommonResult.class)
+    @PostMapping("/logout")
+    public CommonResult logout() {
+        return iSysUserService.logout();
+    }
+
     /**
      * 用户注册操作
      * @param userDto
@@ -106,6 +115,16 @@ public class SysUserController {
     public CommonResult addUser(@Validated(UserRegistValid.class) @RequestBody UserDto userDto) {
         CommonResult commonResult = iSysUserService.addUser(userDto);
         return commonResult;
+    }
+
+    /**
+     * 获取用户信息
+     * @return
+     */
+    @ApiOperation(value = "获取用户信息",notes = "获取用户信息",httpMethod = "POST",response = CommonResult.class)
+    @GetMapping(value = "/getInfo")
+    public CommonResult getUserInfo() {
+        return iSysUserService.getUserInfo();
     }
 
 

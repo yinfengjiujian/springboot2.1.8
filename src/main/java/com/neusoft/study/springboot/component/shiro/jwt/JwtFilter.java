@@ -6,11 +6,13 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.neusoft.study.springboot.common.CommonResult;
 import com.neusoft.study.springboot.config.properties.UserProperties;
 import com.neusoft.study.springboot.exception.BusinessException;
+import com.neusoft.study.springboot.exception.enums.ErrorEnum;
 import com.neusoft.study.springboot.utils.JwtUtil;
 import com.neusoft.study.springboot.utils.RedisServiceUtil;
 import com.neusoft.study.springboot.utils.common.Constant;
 import com.neusoft.study.springboot.utils.common.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.http.HttpStatus;
@@ -123,7 +125,8 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         // 拿到当前Header中Authorization的AccessToken(Shiro中getAuthzHeader方法已经实现)
         JwtToken token = new JwtToken(this.getAuthzHeader(request));
         // 提交给UserRealm进行认证，如果错误他会抛出异常并被捕获
-        this.getSubject(request, response).login(token);
+        Subject subject = this.getSubject(request, response);
+        subject.login(token);
         // 如果没有抛出异常则代表登入成功，返回true
         return true;
     }
@@ -195,7 +198,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setContentType("application/json; charset=utf-8");
         try (PrintWriter out = httpServletResponse.getWriter()) {
-            String data = JSONObject.toJSONString((CommonResult.errorResult(String.valueOf(HttpStatus.UNAUTHORIZED.value()), "无权访问(Unauthorized):" + msg)));
+            String data = JSONObject.toJSONString((CommonResult.errorResult(ErrorEnum.TOKEN_ERROR.getEnumCode(), "无权访问(Unauthorized):" + msg)));
             out.append(data);
         } catch (IOException e) {
             log.error("直接返回Response信息出现IOException异常:" + e.getMessage());

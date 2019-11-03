@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysUserExtendService extends IService<SysUserExtend> {
 
+    SysUserExtend getSysUserExtendById(Long userExtendId);
+
 }

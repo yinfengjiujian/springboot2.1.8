@@ -36,6 +36,11 @@ public class Constant {
     public final static String PREFIX_SHIRO_CACHE = "shiro:cache:";
 
     /**
+     * redis-key-前缀-login:cache:
+     */
+    public final static String PREFIX_LOGIN_CACHE = "login:cache:";
+
+    /**
      * redis-key-前缀-shiro:access_token:
      */
     public final static String PREFIX_SHIRO_ACCESS_TOKEN = "shiro:access_token:";
