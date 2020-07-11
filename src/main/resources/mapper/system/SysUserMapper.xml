@@ -13,5 +13,23 @@
         </where>
     </select>
 
+    <select id="getUserListByCondition" resultType="com.neusoft.study.springboot.biz.system.entity.vo.UserVo">
+        SELECT A.user_account,A.user_name,B.user_sex,B.user_age,B.adress,B.telephone,A.state
+        FROM SYS_USER A LEFT JOIN SYS_USER_EXTEND B ON A.user_ext_id = B.ID
+        <where>
+            <choose>
+                <when test="userAccount !=null and userAccount != '' ">
+                    and A.user_account = #{userAccount}
+                </when>
+                <when test="userName !=null and userName != '' ">
+                    and A.user_name = #{userName}
+                </when>
+                <when test="telephone !=null and telephone != '' ">
+                    and B.telephone = #{telephone}
+                </when>
+            </choose>
+        </where>
+    </select>
+
 
 </mapper>

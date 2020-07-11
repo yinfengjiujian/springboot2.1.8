@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.neusoft.study.springboot.biz.system.entity.*;
+import com.neusoft.study.springboot.biz.system.entity.condition.UserCondition;
 import com.neusoft.study.springboot.biz.system.entity.dto.UserDto;
+import com.neusoft.study.springboot.biz.system.entity.vo.UserVo;
 import com.neusoft.study.springboot.biz.system.mapper.SysUserExtendMapper;
 import com.neusoft.study.springboot.biz.system.mapper.SysUserMapper;
 import com.neusoft.study.springboot.biz.system.service.ISysRoleService;
@@ -218,6 +220,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             userInfo.setRoleList(sysRoleList);
         }
         return userInfo;
+    }
+
+    @Override
+    public List<UserVo> getUserListByCondition(UserCondition userCondition) {
+        return sysUserMapper.getUserListByCondition(userCondition);
     }
 
 }

@@ -2,8 +2,13 @@ package com.neusoft.study.springboot.biz.system.mapper;
 
 import com.neusoft.study.springboot.biz.system.entity.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.neusoft.study.springboot.biz.system.entity.condition.UserCondition;
+import com.neusoft.study.springboot.biz.system.entity.dto.UserDto;
+import com.neusoft.study.springboot.biz.system.entity.vo.UserVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +22,6 @@ import org.springframework.stereotype.Repository;
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
     SysUser getUserByAccount(@Param("account") String account);
+
+    List<UserVo> getUserListByCondition(UserCondition userCondition);
 }

@@ -111,6 +111,13 @@
             <version>2.9.2</version>
         </dependency>
 
+        <!-- goeasy-sdk 依赖-->
+        <dependency>
+            <groupId>io.goeasy</groupId>
+            <artifactId>goeasy-sdk</artifactId>
+            <version>0.3.14</version>
+        </dependency>
+
         <!-- 这是mybatis-plus依赖 -->
         <dependency>
             <groupId>com.baomidou</groupId>

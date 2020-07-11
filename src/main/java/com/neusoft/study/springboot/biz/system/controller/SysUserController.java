@@ -2,23 +2,23 @@ package com.neusoft.study.springboot.biz.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.neusoft.study.springboot.biz.system.entity.SysUser;
+import com.neusoft.study.springboot.biz.system.entity.condition.UserCondition;
 import com.neusoft.study.springboot.biz.system.entity.dto.UserDto;
 import com.neusoft.study.springboot.biz.system.entity.valid.group.UserLoginValid;
 import com.neusoft.study.springboot.biz.system.entity.valid.group.UserRegistValid;
+import com.neusoft.study.springboot.biz.system.entity.vo.UserVo;
 import com.neusoft.study.springboot.biz.system.service.ISysUserService;
 import com.neusoft.study.springboot.common.CommonResult;
 import com.neusoft.study.springboot.utils.RedisServiceUtil;
+import io.goeasy.GoEasy;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +43,8 @@ public class SysUserController {
 
     @Autowired
     private RedisServiceUtil redisServiceUtil;
+    @Autowired
+    private GoEasy goEasy;
 
     @ApiOperation(value = "获取所有用户信息",notes = "查询数据库中的记录",httpMethod = "GET",response = List.class)
     @RequestMapping(value = "/getAllUser",method = {RequestMethod.GET,RequestMethod.POST})
@@ -125,6 +127,17 @@ public class SysUserController {
     @GetMapping(value = "/getInfo")
     public CommonResult getUserInfo() {
         return iSysUserService.getUserInfo();
+    }
+
+    @RequestMapping(value = "/getUserListByCondition")
+    public List<UserVo> getUserListByCondition(@RequestBody UserCondition userCondition){
+        return iSysUserService.getUserListByCondition(userCondition);
+    }
+
+    @RequestMapping(value = "/sendMessage")
+    public void sendMessage(String message) {
+        System.out.println("============");
+        goEasy.publish("testChannel","消息来了，看到了吗？" + message);
     }
 
 

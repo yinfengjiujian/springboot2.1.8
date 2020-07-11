@@ -95,3 +95,7 @@ mybatis-plus:
       id-type: id_worker
 jwt:
   jwt-open: true
+
+goeasy:
+  host: http://rest-hangzhou.goeasy.io
+  appkey: BC-e5c8edea74b84d048f4ae553bd37519e
